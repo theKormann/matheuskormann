@@ -479,6 +479,36 @@ export default function Home() {
               </Link>
             </div>
 
+            <div className="lg:col-span-5 group relative lg:mt-20 hover:-translate-y-2 transition-transform duration-500">
+               <Link href="https://dagym.vercel.app" target="_blank" className="block h-full">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-800 border border-cyan-500/20 hover:border-cyan-500 transition-colors duration-500">
+                    <div className="absolute top-4 left-4 z-20 bg-cyan-600 text-white px-3 py-1 font-mono text-xs uppercase tracking-widest border border-cyan-400 rounded">
+                        Social Media
+                    </div>
+                    {/* Imagem do Projeto */}
+                    <Image
+                      src="/images/dagym-preview.png" // Adicione a screenshot do site aqui
+                      alt="Dagym - Preview do site"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    {/* Overlay escuro no hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 to-cyan-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center text-cyan-400">
+                        <span className="text-6xl font-bold text-cyan-500 mb-2">Dagym</span>
+                        <span className="text-sm font-mono text-blue-400">Rede Social</span>
+                    </div>
+                </div>
+                <div className="mt-6 bg-slate-900/80 p-6 rounded-2xl border border-cyan-500/10">
+                    <h3 className="text-3xl font-bold text-white group-hover:text-cyan-400 transition-colors">Dagym</h3>
+                    <p className="text-slate-400 mt-2 text-lg">Projeto facultativo, com foco em usabilidade e performance. Stack: Next.js + Java Springboot</p>
+                    <div className="flex gap-2 mt-4">
+                        <span className="bg-cyan-900/30 px-3 py-1 text-xs font-bold uppercase rounded-full border border-cyan-500/30 text-cyan-300">Mobile First</span>
+                        <span className="bg-blue-900/30 px-3 py-1 text-xs font-bold uppercase rounded-full border border-blue-500/30 text-blue-300">React</span>
+                    </div>
+                </div>
+              </Link>
+            </div>
+
 
             {/* CARD EXPLICATIVO DE DEV */}
             <div className="lg:col-span-8 lg:col-start-3 group relative mt-12">
