@@ -409,7 +409,6 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-20">
             
-            // ...existing code...
 
             {/* PROJECT 1: MMI REAL ESTATE */}
             <div className="lg:col-span-7 group relative hover:-translate-y-2 transition-transform duration-500">
