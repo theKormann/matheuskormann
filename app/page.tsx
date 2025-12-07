@@ -3,10 +3,11 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
+import { motion } from 'framer-motion' // Certifique-se de ter framer-motion instalado ou remova as referências se não usar
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0)
-  const [hackText, setHackText] = useState('Software Engineer')
+  const [hackText, setHackText] = useState('Java Full Stack')
   const [isHacking, setIsHacking] = useState(false)
   const [formData, setFormData] = useState({
     name: '',
@@ -44,8 +45,9 @@ export default function Home() {
     if (isHacking) return
     setIsHacking(true)
     
-    const originalText = 'Software Engineer'
-    const chars = '01<>/{}[]!@#$%&*?NextJS.TS.Tailwind.Git' 
+    // Texto base para o efeito
+    const originalText = 'Java Full Stack Dev'
+    const chars = '01<>/{}[]!@#$%&*?Java.Spring.Next' 
     let iterations = 0
     
     const interval = setInterval(() => {
@@ -74,7 +76,7 @@ export default function Home() {
 
   const resetText = () => {
     if (!isHacking) {
-      setHackText('Software Engineer')
+      setHackText('Java Full Stack Dev')
     }
   }
 
@@ -123,7 +125,7 @@ export default function Home() {
   }
 
   return (
-    <main className="min-h-screen bg-slate-950 selection:bg-blue-500 selection:text-white relative overflow-x-hidden">
+    <main className="min-h-screen bg-slate-950 selection:bg-blue-500 selection:text-white relative overflow-x-hidden font-sans">
       {/* Cursor personalizado */}
       <div 
         className="fixed w-8 h-8 border-2 border-blue-500 rounded-full pointer-events-none z-[10000] mix-blend-difference transition-transform duration-150 hidden md:block"
@@ -157,7 +159,7 @@ export default function Home() {
         className={`fixed bottom-6 right-6 md:bottom-8 md:right-8 z-[9999] bg-blue-600 text-white p-3 md:p-4 rounded-full shadow-lg shadow-blue-500/50 hover:scale-110 hover:bg-blue-500 transition-all duration-300 ease-out border border-blue-400/30 ${
           showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
         }`}
-        aria-label="Scroll to top"
+        aria-label="Voltar ao topo"
       >
         <svg 
           width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -182,13 +184,13 @@ export default function Home() {
                   boxShadow: '0 25px 50px -12px rgba(59, 130, 246, 0.5)'
                 }}
               >
-                {/* Borda animada */}
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl" />
                 
                 <div className="absolute inset-0 bg-slate-800 animate-pulse z-0 rounded-lg" />
+                {/* Substitua '/images/profile.png' pela sua foto real */}
                 <Image
-                  src="/profile.png" 
-                  alt="Software Engineer Portrait"
+                  src="/images/profile.png" 
+                  alt="Perfil do Desenvolvedor"
                   fill
                   className="object-cover transition-all duration-700 group-hover:grayscale-0 grayscale-[50%] z-10 rounded-lg border-2 border-blue-500/30"
                   priority
@@ -200,9 +202,7 @@ export default function Home() {
                     <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                     <span>STATUS: ONLINE</span>
                   </div>
-                  <div>LAT: -23.5505</div>
-                  <div>LNG: -46.6333</div>
-                  <div className="text-blue-400 mt-1">BUILD: v2.0.1</div>
+                  <div className="text-blue-400 mt-1">STACK: Java/Spring + Next.js</div>
                 </div>
               </div>
             </div>
@@ -214,11 +214,11 @@ export default function Home() {
                 className="fixed top-4 md:top-8 right-4 md:right-8 lg:right-16 flex flex-col items-end gap-1 md:gap-4 z-[9999] transition-all duration-500 pointer-events-auto backdrop-blur-sm bg-slate-900/30 p-4 rounded-lg border border-blue-500/20"
                 style={{ opacity: navOpacity }}
               >
-                {['Home', 'Profile', 'Projects', 'Stack', 'Contact'].map((item) => (
+                {['Home', 'Perfil', 'Projetos', 'Stack', 'Contato'].map((item) => (
                   <Link 
                     key={item}
-                    href={`#${item.toLowerCase()}`} 
-                    onClick={(e) => handleNavClick(e, `#${item.toLowerCase()}`)}
+                    href={`#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`} 
+                    onClick={(e) => handleNavClick(e, `#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`)}
                     className={`text-lg md:text-2xl font-bold ${navTextColor} hover:text-blue-300 transition-all relative group/link pointer-events-auto tracking-tighter`}
                   >
                     <span className="relative z-10">{item}</span>
@@ -246,21 +246,21 @@ export default function Home() {
                 
                 <div className="space-y-1 md:space-y-2 mb-6 md:mb-12 border-l-4 border-blue-500 pl-4 bg-slate-900/30 backdrop-blur-sm p-4 rounded-r-lg">
                   <p className="text-base md:text-xl text-blue-100 font-bold">
-                    Specialized in Next.js & React Ecosystems
+                    Resolução de problemas além do código.
                   </p>
                   <p className="text-sm md:text-lg text-slate-300">
-                    Building robust Full-Stack solutions for <span className="text-blue-400 font-semibold">Real Estate</span> & <span className="text-cyan-400 font-semibold">Social Fitness</span> markets.
+                    Envolve <span className="text-blue-400 font-semibold">lógica, criatividade</span> e a capacidade de entender as reais necessidades do projeto.
                   </p>
                   <p className="text-sm md:text-lg text-blue-400 font-mono pt-2 flex items-center gap-2">
                     <span className="text-green-500">✓</span>
-                    git commit -m "freelance_open"
+                    Melhoria contínua de processos
                   </p>
                 </div>
 
                 <div className="space-y-3 md:space-y-4 group cursor-pointer bg-gradient-to-r from-blue-600 to-cyan-600 p-6 rounded-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300" onClick={(e:any) => handleNavClick(e, '#contact')}>
                   <div className="flex items-center gap-3 md:gap-4">
                     <h2 className="text-xl md:text-3xl font-bold text-white transition-transform duration-300 group-hover:translate-x-2">
-                      Start Collaboration
+                      Vamos Conversar
                     </h2>
                     <svg 
                       width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
@@ -276,7 +276,7 @@ export default function Home() {
                 </div>
               </div>
               
-              <div id="profile"></div>
+              <div id="perfil"></div>
               {/* Seção Sobre Mim */}
               <div 
                 className="absolute bottom-0 left-0 right-0 p-4 md:p-8 lg:p-16 transition-all duration-1000 ease-out bg-slate-900/95 backdrop-blur-md border-t border-blue-500/30"
@@ -289,31 +289,32 @@ export default function Home() {
                 <div className="grid md:grid-cols-3 gap-8">
                     <div className="md:col-span-2 space-y-4">
                         <h2 className="text-2xl font-bold text-blue-400 uppercase tracking-wider flex items-center gap-2">
-                            <span className="text-cyan-400">//</span> Software Profile
+                            <span className="text-cyan-400">//</span> Perfil Profissional
                         </h2>
                         <p className="text-sm md:text-base text-slate-300 leading-relaxed text-justify">
-                            Freelance Software Engineer with expertise in frontend architecture and full-stack development. 
-                            Specialized in solving complex UI challenges like <strong className="text-blue-400">Arc Galleries</strong> 
-                            and integrating React frontends with robust Java/Spring Boot backends. 
-                            I apply <strong className="text-cyan-400">physics-based animations</strong> and mathematical precision to create interfaces that are both beautiful and performant.
+                            Com um ano de experiência no setor de TI, possuo uma mentalidade analítica e comprometida, sempre focada em entregar resultados precisos e de alta qualidade. 
+                            Acredito que todo desafio é uma oportunidade de aprendizado e que o crescimento profissional está diretamente ligado à dedicação.
+                        </p>
+                        <p className="text-sm md:text-base text-slate-300 leading-relaxed text-justify">
+                            Meu objetivo é contribuir ativamente para projetos de impacto, agregando valor por meio da tecnologia e da melhoria contínua de processos.
                         </p>
                     </div>
                     <div className="md:col-span-1 border-l border-blue-500/30 pl-4 md:pl-8 flex flex-col justify-center space-y-4">
-                         <div>
+                          <div>
                            <div className="text-xs font-mono text-blue-400 uppercase mb-1">Status</div>
                            <div className="font-bold text-lg text-white flex items-center gap-2">
                              <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                             Available for Hire
+                             Disponível para Freelance
                            </div>
-                         </div>
-                         <div>
-                           <div className="text-xs font-mono text-blue-400 uppercase mb-1">Location</div>
-                           <div className="font-bold text-lg text-white">Remote / Brazil</div>
-                         </div>
-                         <div>
-                           <div className="text-xs font-mono text-blue-400 uppercase mb-1">Timezone</div>
-                           <div className="font-bold text-lg text-white">UTC-3</div>
-                         </div>
+                          </div>
+                          <div>
+                           <div className="text-xs font-mono text-blue-400 uppercase mb-1">Localização</div>
+                           <div className="font-bold text-lg text-white">Remoto / Brasil</div>
+                          </div>
+                          <div>
+                           <div className="text-xs font-mono text-blue-400 uppercase mb-1">Stack Principal</div>
+                           <div className="font-bold text-lg text-white">Java + Next.js</div>
+                          </div>
                     </div>
                 </div>
               </div>
@@ -324,7 +325,7 @@ export default function Home() {
 
       {/* --- PORTFOLIO SECTION --- */}
       <section 
-        id="projects" 
+        id="projetos" 
         className="min-h-screen bg-slate-900/50 backdrop-blur-sm py-12 md:py-16 lg:py-20 px-6 md:px-12 lg:px-16 overflow-hidden relative z-10 border-y border-blue-500/20"
         ref={projectsRef}
       >
@@ -337,10 +338,10 @@ export default function Home() {
             }}
           >
             <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-transparent bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text mb-4 tracking-tighter">
-              SELECTED
+              PROJETOS
             </h2>
             <h2 className="text-5xl sm:text-6xl md:text-8xl lg:text-9xl font-black text-blue-400/10 tracking-tighter">
-              WORKS
+              SELECIONADOS
             </h2>
           </div>
 
@@ -357,11 +358,11 @@ export default function Home() {
               <Link href="#" className="block">
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-lg bg-slate-800 border border-blue-500/30 hover:border-blue-500 transition-all duration-500">
                     <div className="absolute top-4 left-4 z-20 bg-blue-600 text-white px-3 py-1 font-mono text-xs uppercase tracking-widest border border-blue-400">
-                        Case Study 01
+                        Full Stack
                     </div>
                     <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex flex-col items-center justify-center text-blue-400 group-hover:scale-105 transition-transform duration-700">
                         <span className="text-6xl font-bold text-blue-500 mb-2">MMI</span>
-                        <span className="text-sm font-mono text-cyan-400">Real Estate Platform</span>
+                        <span className="text-sm font-mono text-cyan-400">Plataforma Imobiliária</span>
                         <div className="mt-4 flex gap-2">
                           <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse" />
                           <span className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse delay-150" />
@@ -372,11 +373,11 @@ export default function Home() {
                 <div className="mt-4 flex justify-between items-start bg-slate-900/50 p-4 rounded-lg border border-blue-500/20">
                     <div>
                         <h3 className="text-2xl font-bold text-blue-400 group-hover:text-cyan-400 transition-colors">MMI Real Estate</h3>
-                        <p className="text-slate-300 mt-1 max-w-md">Full-stack CRM & ERP solution. Complex property filtering and lead management system.</p>
+                        <p className="text-slate-300 mt-1 max-w-md">CRM & ERP Completo. Backend robusto em Java com Frontend em Next.js.</p>
                     </div>
                     <div className="text-right hidden md:block">
                         <span className="block font-mono text-xs text-blue-400">STACK</span>
-                        <span className="font-bold text-sm text-white">Next.js + Spring Boot</span>
+                        <span className="font-bold text-sm text-white">Spring Boot + Next.js</span>
                     </div>
                 </div>
               </Link>
@@ -393,21 +394,16 @@ export default function Home() {
                <Link href="#" className="block">
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-lg bg-slate-800 border border-cyan-500/30 hover:border-cyan-500 transition-all duration-500">
                     <div className="absolute top-4 left-4 z-20 bg-cyan-600 text-white px-3 py-1 font-mono text-xs uppercase tracking-widest border border-cyan-400">
-                        Case Study 02
+                        App Social
                     </div>
-                     <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex flex-col items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform duration-700">
+                      <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex flex-col items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform duration-700">
                         <span className="text-6xl font-bold text-cyan-500 mb-2">Dagym</span>
-                        <span className="text-sm font-mono text-blue-400">Social Fitness App</span>
-                        <div className="mt-4 flex gap-2">
-                          <span className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse" />
-                          <span className="w-2 h-2 bg-blue-500 rounded-full animate-pulse delay-150" />
-                          <span className="w-2 h-2 bg-cyan-500 rounded-full animate-pulse delay-300" />
-                        </div>
+                        <span className="text-sm font-mono text-blue-400">Fitness Social Network</span>
                     </div>
                 </div>
                 <div className="mt-4 bg-slate-900/50 p-4 rounded-lg border border-cyan-500/20">
                     <h3 className="text-2xl font-bold text-cyan-400 group-hover:text-blue-400 transition-colors">Dagym</h3>
-                    <p className="text-slate-300 mt-1">Social network for fitness enthusiasts. Workout tracking, diet plans, and community features.</p>
+                    <p className="text-slate-300 mt-1">Rede social fitness com foco em usabilidade e performance.</p>
                     <div className="flex gap-2 mt-3">
                         <span className="bg-cyan-900/50 px-2 py-1 text-[10px] font-bold uppercase rounded border border-cyan-500/30 text-cyan-400">Mobile First</span>
                         <span className="bg-blue-900/50 px-2 py-1 text-[10px] font-bold uppercase rounded border border-blue-500/30 text-blue-400">React</span>
@@ -416,7 +412,7 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* PROJECT 3: ARC GALLERY & COMPONENTS */}
+            {/* CARD EXPLICATIVO DE DEV */}
             <div 
               className="lg:col-span-8 lg:col-start-3 group relative mt-12"
               style={{
@@ -429,51 +425,41 @@ export default function Home() {
                       <div>
                           <div className="text-xs font-mono text-cyan-400 mb-4 flex items-center gap-2">
                             <span className="text-blue-500">&lt;/&gt;</span>
-                            UI ENGINEERING
+                            BACKEND & INTEGRAÇÃO
                           </div>
-                          <h3 className="text-3xl md:text-5xl font-bold mb-6 text-blue-400">Component Architecture</h3>
+                          <h3 className="text-3xl md:text-5xl font-bold mb-6 text-blue-400">Arquitetura Sólida</h3>
                           <p className="text-slate-300 mb-6 leading-relaxed">
-                              Beyond standard pages, I engineer complex, reusable React components. 
-                              Example: <strong className="text-cyan-400">ArcGalleryHero</strong>, a geometric image gallery with advanced circular distribution algorithms.
+                             Minha experiência com <strong>Java</strong> e <strong>Spring Boot</strong> permite criar APIs seguras e escaláveis. 
+                             No Frontend, utilizo <strong>Next.js</strong> e <strong>TypeScript</strong> para consumir esses serviços com eficiência e tipagem estática.
                           </p>
                           <ul className="space-y-3 font-mono text-sm text-slate-300">
                               <li className="flex items-center gap-3 group/item hover:text-blue-400 transition-colors">
                                   <span className="w-2 h-2 bg-green-500 rounded-full group-hover/item:animate-ping"></span> 
-                                  TypeScript Strict Mode
+                                  API RESTful Design
                               </li>
                               <li className="flex items-center gap-3 group/item hover:text-cyan-400 transition-colors">
                                   <span className="w-2 h-2 bg-green-500 rounded-full group-hover/item:animate-ping"></span> 
-                                  Atomic Design Principles
-                              </li>
-                              <li className="flex items-center gap-3 group/item hover:text-blue-400 transition-colors">
-                                  <span className="w-2 h-2 bg-green-500 rounded-full group-hover/item:animate-ping"></span> 
-                                  Performance Optimized
+                                  Database Management (SQL)
                               </li>
                           </ul>
                       </div>
+                      
+                      {/* Code Snippet Visual */}
                       <div className="relative aspect-square bg-slate-950 rounded-lg border-2 border-blue-500/30 p-6 font-mono text-xs text-green-400 overflow-auto opacity-80 hover:opacity-100 transition-opacity">
                           <div className="space-y-1">
-                            <p className="text-blue-400">import {'{'} useState, useEffect {'}'} from 'react';</p>
-                            <p className="text-cyan-400">import {'{'} motion {'}'} from 'framer-motion';</p>
-                            <p className="mt-3"></p>
-                            <p className="text-purple-400">const <span className="text-yellow-400">ArcGallery</span> = ({'{'} <span className="text-blue-300">images</span> {'}'}) =&gt; {'{'}</p>
-                            <p className="pl-4 text-slate-400">// Physics-based positioning</p>
-                            <p className="pl-4">const <span className="text-cyan-400">radius</span> = <span className="text-orange-400">300</span>;</p>
-                            <p className="pl-4">const <span className="text-cyan-400">angle</span> = <span className="text-orange-400">360</span> / images.length;</p>
-                            <p className="mt-2 pl-4">return (</p>
-                            <p className="pl-8">&lt;<span className="text-purple-400">motion.div</span></p>
-                            <p className="pl-10">className=<span className="text-green-400">"transform-3d"</span></p>
-                            <p className="pl-10">animate={'{{'}rotate: <span className="text-orange-400">360</span>{'}}'}</p>
-                            <p className="pl-8">&gt;</p>
-                            <p className="pl-10">{'{'}images.map((img, i) =&gt; (</p>
-                            <p className="pl-12">&lt;<span className="text-purple-400">Card</span></p>
-                            <p className="pl-14">key={'{'}i{'}'}</p>
-                            <p className="pl-14">rotate={'{'}i * angle{'}'}</p>
-                            <p className="pl-14">radius={'{'}radius{'}'}</p>
-                            <p className="pl-12">/&gt;</p>
-                            <p className="pl-10">)){'}'}</p>
-                            <p className="pl-8">&lt;/<span className="text-purple-400">motion.div</span>&gt;</p>
-                            <p className="pl-4">);</p>
+                            <p className="text-blue-400">@RestController</p>
+                            <p className="text-cyan-400">@RequestMapping(<span className="text-yellow-400">"/api/projects"</span>)</p>
+                            <p className="text-purple-400">public class <span className="text-yellow-400">ProjectController</span> {'{'}</p>
+                            <p className="mt-2 pl-4 text-slate-500">// Foco em código limpo</p>
+                            <p className="pl-4 text-purple-400">@GetMapping</p>
+                            <p className="pl-4">public ResponseEntity&lt;List&lt;Project&gt;&gt; getAll() {'{'}</p>
+                            <p className="pl-8 text-slate-500">// Lógica de negócio aqui</p>
+                            <p className="pl-8">return service.findAll();</p>
+                            <p className="pl-4">{'}'}</p>
+                            <p className="mt-2 text-purple-400">@PostMapping</p>
+                            <p className="pl-4">public Project create(<span className="text-blue-400">@RequestBody</span> Project dto) {'{'}</p>
+                            <p className="pl-8">return service.save(dto);</p>
+                            <p className="pl-4">{'}'}</p>
                             <p>{'}'}</p>
                           </div>
                       </div>
@@ -495,46 +481,46 @@ export default function Home() {
               transform: `translateY(${Math.max(0, 40 - (scrollY - 2200) / 12)}px)`
             }}
           >
-            Technical Capabilities
+            Competências Técnicas
           </h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16">
             {[
                 {
                     id: "01",
-                    title: "Frontend Development",
-                    desc: "Pixel-perfect implementation using Next.js, React, and Tailwind CSS. Responsive, accessible, and blazing fast.",
-                    icon: "⚛️"
+                    title: "Backend Development",
+                    desc: "Java, Spring Boot e Maven. Construção de sistemas robustos e arquitetura de microsserviços.",
+                    icon: "☕"
                 },
                 {
                     id: "02",
-                    title: "Backend Integration",
-                    desc: "Experience consuming complex RESTful APIs. Seamless integration with Java/Spring Boot architectures.",
-                    icon: "🔌"
+                    title: "Frontend Moderno",
+                    desc: "Next.js, TypeScript e Javascript. Interfaces reativas e de alta performance.",
+                    icon: "⚛️"
                 },
                 {
                     id: "03",
-                    title: "SaaS & Dashboards",
-                    desc: "Building administrative panels, CRMs, and data-heavy interfaces with intuitive UX.",
-                    icon: "📊"
+                    title: "Banco de Dados",
+                    desc: "MySQL e PostgreSQL. Modelagem de dados e otimização de queries.",
+                    icon: "💾"
                 },
                 {
                     id: "04",
-                    title: "Deployment & DevOps",
-                    desc: "Git workflow mastery. CI/CD pipelines setup and Vercel optimization for production.",
+                    title: "DevOps & Tools",
+                    desc: "Docker, Git Bash, Postman, Jira e Trello. Fluxo de CI/CD e versionamento.",
                     icon: "🚀"
                 },
                 {
                     id: "05",
-                    title: "Performance Tuning",
-                    desc: "Optimizing Core Web Vitals, reducing bundle sizes, implementing advanced lazy loading.",
-                    icon: "⚡"
+                    title: "Metodologias Ágeis",
+                    desc: "Experiência com Scrum e Agile. Organização e entregas iterativas.",
+                    icon: "🔄"
                 },
                 {
                     id: "06",
-                    title: "Creative Engineering",
-                    desc: "Solving non-standard UI challenges with custom logic, physics-based animations, and interactive elements.",
-                    icon: "🎨"
+                    title: "Soft Skills",
+                    desc: "Comunicação, Organização, Proatividade e Inovação. Foco em melhoria contínua.",
+                    icon: "🤝"
                 }
             ].map((service, index) => (
                 <div 
@@ -564,7 +550,7 @@ export default function Home() {
       </section>
 
       {/* --- CONTACT SECTION --- */}
-      <section id="contact" className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-950 text-white px-6 md:px-12 lg:px-20 py-20 relative overflow-hidden z-10 border-t-2 border-blue-500/30">
+      <section id="contato" className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-950 text-white px-6 md:px-12 lg:px-20 py-20 relative overflow-hidden z-10 border-t-2 border-blue-500/30">
         {/* Elementos de fundo decorativos */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[150px] pointer-events-none animate-pulse" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-cyan-600/20 rounded-full blur-[150px] pointer-events-none animate-pulse delay-1000" />
@@ -577,7 +563,7 @@ export default function Home() {
               transform: `translateY(${Math.max(0, 40 - (scrollY - 3200) / 12)}px)`
             }}
           >
-            Let's build something great
+            Vamos construir algo incrível?
           </h2>
 
           <p 
@@ -587,8 +573,8 @@ export default function Home() {
               transform: `translateY(${Math.max(0, 30 - (scrollY - 3300) / 10)}px)`
             }}
           >
-            Currently open for <span className="text-blue-400 font-bold">freelance projects</span> and new opportunities. 
-            Whether you need a landing page, a full SaaS MVP, or help engineering complex components.
+            Atualmente aberto para <span className="text-blue-400 font-bold">projetos freelance</span> e novas oportunidades. 
+            Seja para desenvolver uma plataforma completa ou melhorar processos existentes.
           </p>
 
           <form 
@@ -602,7 +588,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               <div className="space-y-3 group">
                 <label htmlFor="name" className="block text-xs uppercase tracking-wider text-blue-400 group-focus-within:text-cyan-400 transition-colors flex items-center gap-2">
-                  <span>👤</span> Name / Company
+                  <span>👤</span> Nome / Empresa
                 </label>
                 <input
                   type="text"
@@ -612,7 +598,7 @@ export default function Home() {
                   onChange={handleInputChange}
                   required
                   className="w-full bg-slate-800/50 border-b-2 border-blue-500/30 focus:border-blue-500 py-4 text-lg md:text-xl outline-none transition-all duration-300 placeholder-slate-600 text-white px-4 rounded-t"
-                  placeholder="John Doe"
+                  placeholder="Seu nome"
                 />
               </div>
 
@@ -628,14 +614,14 @@ export default function Home() {
                   onChange={handleInputChange}
                   required
                   className="w-full bg-slate-800/50 border-b-2 border-blue-500/30 focus:border-blue-500 py-4 text-lg md:text-xl outline-none transition-all duration-300 placeholder-slate-600 text-white px-4 rounded-t"
-                  placeholder="john@company.com"
+                  placeholder="seu@email.com"
                 />
               </div>
             </div>
 
             <div className="space-y-3 group">
               <label htmlFor="message" className="block text-xs uppercase tracking-wider text-blue-400 group-focus-within:text-cyan-400 transition-colors flex items-center gap-2">
-                <span>💬</span> Project Details
+                <span>💬</span> Detalhes do Projeto
               </label>
               <textarea
                 id="message"
@@ -645,7 +631,7 @@ export default function Home() {
                 required
                 rows={4}
                 className="w-full bg-slate-800/50 border-b-2 border-blue-500/30 focus:border-blue-500 py-4 text-lg md:text-xl outline-none resize-none transition-all duration-300 placeholder-slate-600 text-white px-4 rounded-t"
-                placeholder="I need a Next.js developer for..."
+                placeholder="Preciso de um desenvolvedor Full Stack para..."
               />
             </div>
 
@@ -654,7 +640,7 @@ export default function Home() {
                 type="submit"
                 className="group relative inline-flex items-center gap-4 text-xl md:text-2xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 text-white px-10 py-5 hover:from-blue-500 hover:to-cyan-500 transition-all duration-300 overflow-hidden rounded-lg shadow-xl shadow-blue-500/50 hover:shadow-2xl hover:shadow-blue-500/70 hover:scale-105"
               >
-                <span className="relative z-10">Send Message</span>
+                <span className="relative z-10">Enviar Mensagem</span>
                 <svg 
                   width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
                   className="relative z-10 transition-transform duration-300 group-hover:translate-x-2"
@@ -673,34 +659,31 @@ export default function Home() {
             }}
           >
             <div className="space-y-2">
-              <p className="text-blue-400 text-xs uppercase tracking-wider">Direct Contact</p>
+              <p className="text-blue-400 text-xs uppercase tracking-wider">Contato Direto</p>
               <Link 
-                href="mailto:your-email@gmail.com"
+                href="mailto:kormannmatheus@gmail.com"
                 className="text-xl md:text-2xl hover:text-cyan-400 transition-colors font-mono flex items-center gap-2"
               >
                 <span>📧</span>
-                your-email@gmail.com
+                kormannmatheus@gmail.com
               </Link>
             </div>
             <div className="space-y-2">
-              <p className="text-blue-400 text-xs uppercase tracking-wider">Connect</p>
+              <p className="text-blue-400 text-xs uppercase tracking-wider">Conectar</p>
               <div className="flex gap-8">
-                <Link href="#" className="text-lg hover:text-cyan-400 transition-colors flex items-center gap-2">
+                <Link href="https://www.linkedin.com/in/matheuskormann/" className="text-lg hover:text-cyan-400 transition-colors flex items-center gap-2">
                   💼 LinkedIn
                 </Link>
-                <Link href="#" className="text-lg hover:text-cyan-400 transition-colors flex items-center gap-2">
+                <Link href="https://github.com/theKormann" className="text-lg hover:text-cyan-400 transition-colors flex items-center gap-2">
                   🐙 GitHub
-                </Link>
-                <Link href="#" className="text-lg hover:text-cyan-400 transition-colors flex items-center gap-2">
-                  🐦 Twitter
                 </Link>
               </div>
             </div>
           </div>
           
           <div className="mt-20 text-center md:text-left text-slate-600 text-sm font-mono flex items-center justify-between flex-wrap gap-4">
-            <span>© {new Date().getFullYear()} Engineered with Next.js, TypeScript & Physics</span>
-            <span className="text-blue-500">v2.0.1</span>
+            <span>© {new Date().getFullYear()} Desenvolvido com Next.js & Java</span>
+            <span className="text-blue-500">v2.1.0</span>
           </div>
         </div>
       </section>
