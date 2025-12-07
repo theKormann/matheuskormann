@@ -251,13 +251,12 @@ export default function Home() {
       </header>
 
       {/* --- HERO SECTION --- */}
-      {/* Removido o height fixo de 150vh que causava bugs. Agora usa min-h-screen */}
       <div id="home" className="relative z-10 min-h-screen flex items-center pt-20 md:pt-0">
         <div className="w-full max-w-[1800px] mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-0 items-center">
             
-            {/* Coluna da Imagem (Esquerda) */}
-            <div className="flex items-center justify-center p-6 md:p-8 lg:p-16 relative order-2 lg:order-1">
+            {/* Coluna da Imagem (Esquerda) - REMOVIDO 'order-2' PARA FICAR PRIMEIRO NO MOBILE */}
+            <div className="flex items-center justify-center p-6 md:p-8 lg:p-16 relative">
               <div 
                 className="relative w-full max-w-lg aspect-[3/4] transition-all duration-300 ease-out hover:scale-105 group px-4 overflow-hidden rounded-2xl"
                 style={{
@@ -288,8 +287,8 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Coluna de Conteúdo (Direita) */}
-            <div className="flex flex-col justify-center p-6 md:p-8 lg:p-16 relative order-1 lg:order-2" style={{ opacity: heroContentOpacity }}>
+            {/* Coluna de Conteúdo (Direita) - REMOVIDO 'order-1' PARA FICAR EMBAIXO NO MOBILE */}
+            <div className="flex flex-col justify-center p-6 md:p-8 lg:p-16 relative" style={{ opacity: heroContentOpacity }}>
                 <div className="font-mono text-sm text-blue-400 mb-4 tracking-widest uppercase flex items-center gap-2">
                   <span className="text-blue-500">&gt;_</span>
                   <span>Software.Engineer()</span>
@@ -340,7 +339,7 @@ export default function Home() {
         </div>
       </div>
       
-      {/* --- SEÇÃO PERFIL (Corrigida: Sem position absolute para não entrar "esquisito") --- */}
+      {/* --- SEÇÃO PERFIL --- */}
       <section id="perfil" className="relative z-20 bg-slate-950 py-20">
         <div className="container mx-auto px-6">
             <div className="bg-gradient-to-br from-slate-900 to-blue-950/30 backdrop-blur-xl p-8 md:p-12 border border-blue-500/20 shadow-2xl rounded-2xl relative overflow-hidden">
@@ -354,7 +353,7 @@ export default function Home() {
                         </h2>
                         <div className="space-y-4 text-slate-300 text-lg leading-relaxed text-justify">
                             <p>
-                                Com um ano de experiência no setor de TI, possuo uma mentalidade analítica e comprometida, sempre focada em entregar resultados precisos e de alta qualidade. 
+                                Com dois anos de experiência na área de TI, possuo uma mentalidade analítica e comprometida, sempre focada em entregar resultados precisos e de alta qualidade. 
                                 Acredito que todo desafio é uma oportunidade de aprendizado e que o crescimento profissional está diretamente ligado à dedicação.
                             </p>
                             <p>
@@ -412,7 +411,7 @@ export default function Home() {
             
             {/* PROJECT 1: MMI REAL ESTATE */}
             <div className="lg:col-span-7 group relative hover:-translate-y-2 transition-transform duration-500">
-              <Link href="#" className="block h-full">
+              <Link href="https://mmimoraesmendesimoveis.com.br" className="block h-full">
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-800 border border-blue-500/20 hover:border-blue-500 transition-colors duration-500">
                     <div className="absolute top-4 left-4 z-20 bg-blue-600 text-white px-3 py-1 font-mono text-xs uppercase tracking-widest border border-blue-400 rounded">
                         Full Stack
@@ -442,19 +441,19 @@ export default function Home() {
 
             {/* PROJECT 2: DAGYM FITNESS */}
             <div className="lg:col-span-5 group relative lg:mt-20 hover:-translate-y-2 transition-transform duration-500">
-               <Link href="#" className="block h-full">
+               <Link href="https://allipel.com.br" className="block h-full">
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-800 border border-cyan-500/20 hover:border-cyan-500 transition-colors duration-500">
                     <div className="absolute top-4 left-4 z-20 bg-cyan-600 text-white px-3 py-1 font-mono text-xs uppercase tracking-widest border border-cyan-400 rounded">
-                        App Social
+                        Website
                     </div>
                       <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex flex-col items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform duration-700">
-                        <span className="text-6xl font-bold text-cyan-500 mb-2">Dagym</span>
-                        <span className="text-sm font-mono text-blue-400">Fitness Social Network</span>
+                        <span className="text-6xl font-bold text-cyan-500 mb-2">Allipel</span>
+                        <span className="text-sm font-mono text-blue-400">Institutional website</span>
                     </div>
                 </div>
                 <div className="mt-6 bg-slate-900/80 p-6 rounded-2xl border border-cyan-500/10">
-                    <h3 className="text-3xl font-bold text-white group-hover:text-cyan-400 transition-colors">Dagym</h3>
-                    <p className="text-slate-400 mt-2 text-lg">Rede social fitness com foco em usabilidade e performance.</p>
+                    <h3 className="text-3xl font-bold text-white group-hover:text-cyan-400 transition-colors">Allipel</h3>
+                    <p className="text-slate-400 mt-2 text-lg">Website institucional com foco em usabilidade e performance.</p>
                     <div className="flex gap-2 mt-4">
                         <span className="bg-cyan-900/30 px-3 py-1 text-xs font-bold uppercase rounded-full border border-cyan-500/30 text-cyan-300">Mobile First</span>
                         <span className="bg-blue-900/30 px-3 py-1 text-xs font-bold uppercase rounded-full border border-blue-500/30 text-blue-300">React</span>
