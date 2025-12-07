@@ -452,7 +452,7 @@ export default function Home() {
             {/* PROJECT 2: ALLIPEL */}
             <div className="lg:col-span-5 group relative lg:mt-20 hover:-translate-y-2 transition-transform duration-500">
                <Link href="https://allipel.com.br" target="_blank" className="block h-full">
-                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-800 border border-cyan-500/20 hover:border-cyan-500 transition-colors duration-500">
+                <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-800 border border-cyan-500/20 hover:border-cyan-500 transition-colors duration-500">
                     <div className="absolute top-4 left-4 z-20 bg-cyan-600 text-white px-3 py-1 font-mono text-xs uppercase tracking-widest border border-cyan-400 rounded">
                         Website
                     </div>
