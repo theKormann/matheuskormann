@@ -409,14 +409,24 @@ export default function Home() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-8 lg:gap-12 pb-20">
             
+            // ...existing code...
+
             {/* PROJECT 1: MMI REAL ESTATE */}
             <div className="lg:col-span-7 group relative hover:-translate-y-2 transition-transform duration-500">
-              <Link href="https://mmimoraesmendesimoveis.com.br" className="block h-full">
+              <Link href="https://mmimoraesmendesimoveis.com.br" target="_blank" className="block h-full">
                 <div className="relative aspect-[16/10] w-full overflow-hidden rounded-2xl bg-slate-800 border border-blue-500/20 hover:border-blue-500 transition-colors duration-500">
                     <div className="absolute top-4 left-4 z-20 bg-blue-600 text-white px-3 py-1 font-mono text-xs uppercase tracking-widest border border-blue-400 rounded">
                         Full Stack
                     </div>
-                    <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex flex-col items-center justify-center text-blue-400 group-hover:scale-105 transition-transform duration-700">
+                    {/* Imagem do Projeto */}
+                    <Image
+                      src="/images/mmi-preview.png" // Adicione a screenshot do site aqui
+                      alt="MMI Real Estate - Preview do site"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    {/* Overlay escuro no hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 to-blue-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center text-blue-400">
                         <span className="text-6xl font-bold text-blue-500 mb-2">MMI</span>
                         <span className="text-sm font-mono text-cyan-400">Plataforma Imobiliária</span>
                         <div className="mt-4 flex gap-2">
@@ -439,14 +449,22 @@ export default function Home() {
               </Link>
             </div>
 
-            {/* PROJECT 2: DAGYM FITNESS */}
+            {/* PROJECT 2: ALLIPEL */}
             <div className="lg:col-span-5 group relative lg:mt-20 hover:-translate-y-2 transition-transform duration-500">
-               <Link href="https://allipel.com.br" className="block h-full">
+               <Link href="https://allipel.com.br" target="_blank" className="block h-full">
                 <div className="relative aspect-[4/5] w-full overflow-hidden rounded-2xl bg-slate-800 border border-cyan-500/20 hover:border-cyan-500 transition-colors duration-500">
                     <div className="absolute top-4 left-4 z-20 bg-cyan-600 text-white px-3 py-1 font-mono text-xs uppercase tracking-widest border border-cyan-400 rounded">
                         Website
                     </div>
-                      <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-900 flex flex-col items-center justify-center text-cyan-400 group-hover:scale-105 transition-transform duration-700">
+                    {/* Imagem do Projeto */}
+                    <Image
+                      src="/images/allipel-preview.png" // Adicione a screenshot do site aqui
+                      alt="Allipel - Preview do site"
+                      fill
+                      className="object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    {/* Overlay escuro no hover */}
+                    <div className="absolute inset-0 bg-gradient-to-br from-slate-900/80 to-cyan-900/80 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col items-center justify-center text-cyan-400">
                         <span className="text-6xl font-bold text-cyan-500 mb-2">Allipel</span>
                         <span className="text-sm font-mono text-blue-400">Institutional website</span>
                     </div>
@@ -461,6 +479,7 @@ export default function Home() {
                 </div>
               </Link>
             </div>
+
 
             {/* CARD EXPLICATIVO DE DEV */}
             <div className="lg:col-span-8 lg:col-start-3 group relative mt-12">
