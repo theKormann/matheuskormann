@@ -203,7 +203,7 @@ export default function Home() {
                 
                 <div className="absolute inset-0 bg-slate-800 animate-pulse z-0 rounded-lg" />
                 <Image
-                  src="/images/profile.png" 
+                  src="/images/profilesite.png" 
                   alt="Perfil do Desenvolvedor"
                   fill
                   className="object-cover transition-all duration-700 group-hover:grayscale-0 grayscale-[50%] z-10 rounded-lg border-2 border-blue-500/30"
