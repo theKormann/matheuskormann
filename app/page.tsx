@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
-import { motion } from 'framer-motion' // Certifique-se de ter framer-motion instalado ou remova as referências se não usar
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0)
@@ -16,6 +15,7 @@ export default function Home() {
   })
   const [showScrollTop, setShowScrollTop] = useState(false)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [activeSection, setActiveSection] = useState('home')
   
   const projectsRef = useRef<HTMLDivElement>(null)
 
@@ -27,6 +27,21 @@ export default function Home() {
     const handleScroll = () => {
       setScrollY(window.scrollY)
       setShowScrollTop(window.scrollY > 500)
+      
+      // Detectar seção ativa
+      const sections = ['home', 'perfil', 'projetos', 'stack', 'contato']
+      const scrollPosition = window.scrollY + 200
+      
+      for (const section of sections) {
+        const element = document.getElementById(section)
+        if (element) {
+          const { offsetTop, offsetHeight } = element
+          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+            setActiveSection(section)
+            break
+          }
+        }
+      }
     }
 
     const handleMouseMove = (e: MouseEvent) => {
@@ -35,6 +50,10 @@ export default function Home() {
 
     window.addEventListener('scroll', handleScroll, { passive: true })
     window.addEventListener('mousemove', handleMouseMove)
+    
+    // Executar uma vez no mount
+    handleScroll()
+    
     return () => {
       window.removeEventListener('scroll', handleScroll)
       window.removeEventListener('mousemove', handleMouseMove)
@@ -45,8 +64,7 @@ export default function Home() {
     if (isHacking) return
     setIsHacking(true)
     
-    // Texto base para o efeito
-    const originalText = 'Java Full Stack Dev'
+    const originalText = 'Matheus Kormann'
     const chars = '01<>/{}[]!@#$%&*?Java.Spring.Next' 
     let iterations = 0
     
@@ -88,15 +106,12 @@ export default function Home() {
   const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
   const imageTranslateX = isMobile ? (-scrollProgress * 30) : 0
   
-  const aboutMeProgress = Math.max(0, Math.min(1, (scrollY - heroHeight * 0.5) / (heroHeight * 0.3)))
+  // Melhorar o controle da seção "Sobre Mim"
+  const aboutMeStart = heroHeight * 0.3
+  const aboutMeEnd = heroHeight * 0.9
+  const aboutMeProgress = Math.max(0, Math.min(1, (scrollY - aboutMeStart) / (aboutMeEnd - aboutMeStart)))
   
-  const navOpacity = scrollY > 100 ? 0.95 : 1
-
-  const contactSection = typeof document !== 'undefined' ? document.querySelector('#contact') : null
-  const contactSectionTop = contactSection?.getBoundingClientRect().top ?? Infinity
-  const isInContactSection = contactSectionTop <= 100
-  
-  const navTextColor = isInContactSection ? 'text-blue-300' : 'text-blue-400'
+  const navOpacity = scrollY > 100 ? 0.98 : 1
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -187,7 +202,6 @@ export default function Home() {
                 <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-blue-500 via-cyan-500 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10 blur-xl" />
                 
                 <div className="absolute inset-0 bg-slate-800 animate-pulse z-0 rounded-lg" />
-                {/* Substitua '/images/profile.png' pela sua foto real */}
                 <Image
                   src="/images/profile.png" 
                   alt="Perfil do Desenvolvedor"
@@ -209,20 +223,37 @@ export default function Home() {
 
             {/* Coluna de Conteúdo (Direita) */}
             <div className="flex flex-col justify-between p-6 md:p-8 lg:p-16 relative">
-              {/* Navegação */}
+              {/* Navegação MELHORADA */}
               <nav 
-                className="fixed top-4 md:top-8 right-4 md:right-8 lg:right-16 flex flex-col items-end gap-1 md:gap-4 z-[9999] transition-all duration-500 pointer-events-auto backdrop-blur-sm bg-slate-900/30 p-4 rounded-lg border border-blue-500/20"
+                className="fixed top-4 md:top-8 right-4 md:right-8 lg:right-16 flex flex-col items-end gap-2 md:gap-3 z-[9999] transition-all duration-500 pointer-events-auto backdrop-blur-md bg-slate-900/80 p-4 md:p-6 rounded-xl border-2 border-blue-500/40 shadow-xl shadow-blue-500/20"
                 style={{ opacity: navOpacity }}
               >
-                {['Home', 'Perfil', 'Projetos', 'Stack', 'Contato'].map((item) => (
+                {[
+                  { name: 'Home', id: 'home' },
+                  { name: 'Perfil', id: 'perfil' },
+                  { name: 'Projetos', id: 'projetos' },
+                  { name: 'Stack', id: 'stack' },
+                  { name: 'Contato', id: 'contato' }
+                ].map((item) => (
                   <Link 
-                    key={item}
-                    href={`#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`} 
-                    onClick={(e) => handleNavClick(e, `#${item.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "")}`)}
-                    className={`text-lg md:text-2xl font-bold ${navTextColor} hover:text-blue-300 transition-all relative group/link pointer-events-auto tracking-tighter`}
+                    key={item.id}
+                    href={`#${item.id}`} 
+                    onClick={(e) => handleNavClick(e, `#${item.id}`)}
+                    className={`text-base md:text-xl font-bold transition-all relative group/link pointer-events-auto tracking-tight ${
+                      activeSection === item.id 
+                        ? 'text-cyan-400 scale-110' 
+                        : 'text-blue-400 hover:text-blue-300'
+                    }`}
                   >
-                    <span className="relative z-10">{item}</span>
-                    <span className={`absolute bottom-0 left-0 w-0 h-0.5 bg-blue-500 transition-all duration-300 group-hover/link:w-full`}></span>
+                    <span className="relative z-10 flex items-center gap-2">
+                      {activeSection === item.id && (
+                        <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />
+                      )}
+                      {item.name}
+                    </span>
+                    <span className={`absolute bottom-0 left-0 h-0.5 bg-cyan-400 transition-all duration-300 ${
+                      activeSection === item.id ? 'w-full' : 'w-0 group-hover/link:w-full'
+                    }`}></span>
                   </Link>
                 ))}
               </nav>
@@ -233,7 +264,7 @@ export default function Home() {
               >
                 <div className="font-mono text-sm text-blue-400 mb-2 tracking-widest uppercase flex items-center gap-2">
                   <span className="text-blue-500">&gt;_</span>
-                  <span>System.init()</span>
+                  <span>Software.Engineer()</span>
                 </div>
                 
                 <h1 
@@ -257,7 +288,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="space-y-3 md:space-y-4 group cursor-pointer bg-gradient-to-r from-blue-600 to-cyan-600 p-6 rounded-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300" onClick={(e:any) => handleNavClick(e, '#contact')}>
+                <div className="space-y-3 md:space-y-4 group cursor-pointer bg-gradient-to-r from-blue-600 to-cyan-600 p-6 rounded-lg hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300" onClick={(e:any) => handleNavClick(e, '#contato')}>
                   <div className="flex items-center gap-3 md:gap-4">
                     <h2 className="text-xl md:text-3xl font-bold text-white transition-transform duration-300 group-hover:translate-x-2">
                       Vamos Conversar
@@ -276,46 +307,48 @@ export default function Home() {
                 </div>
               </div>
               
-              <div id="perfil"></div>
-              {/* Seção Sobre Mim */}
+              {/* SEÇÃO PERFIL MELHORADA */}
               <div 
-                className="absolute bottom-0 left-0 right-0 p-4 md:p-8 lg:p-16 transition-all duration-1000 ease-out bg-slate-900/95 backdrop-blur-md border-t border-blue-500/30"
+                id="perfil"
+                className="absolute bottom-0 left-0 right-0 transition-all duration-700 ease-out"
                 style={{
                   opacity: aboutMeProgress,
-                  transform: `translateY(${(1 - aboutMeProgress) * 50}px)`,
-                  pointerEvents: aboutMeProgress > 0.5 ? 'auto' : 'none',
+                  transform: `translateY(${(1 - aboutMeProgress) * 100}px)`,
+                  pointerEvents: aboutMeProgress > 0.3 ? 'auto' : 'none',
                 }}
               >
-                <div className="grid md:grid-cols-3 gap-8">
-                    <div className="md:col-span-2 space-y-4">
-                        <h2 className="text-2xl font-bold text-blue-400 uppercase tracking-wider flex items-center gap-2">
-                            <span className="text-cyan-400">//</span> Perfil Profissional
-                        </h2>
-                        <p className="text-sm md:text-base text-slate-300 leading-relaxed text-justify">
-                            Com um ano de experiência no setor de TI, possuo uma mentalidade analítica e comprometida, sempre focada em entregar resultados precisos e de alta qualidade. 
-                            Acredito que todo desafio é uma oportunidade de aprendizado e que o crescimento profissional está diretamente ligado à dedicação.
-                        </p>
-                        <p className="text-sm md:text-base text-slate-300 leading-relaxed text-justify">
-                            Meu objetivo é contribuir ativamente para projetos de impacto, agregando valor por meio da tecnologia e da melhoria contínua de processos.
-                        </p>
-                    </div>
-                    <div className="md:col-span-1 border-l border-blue-500/30 pl-4 md:pl-8 flex flex-col justify-center space-y-4">
-                          <div>
-                           <div className="text-xs font-mono text-blue-400 uppercase mb-1">Status</div>
-                           <div className="font-bold text-lg text-white flex items-center gap-2">
-                             <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                             Disponível para Freelance
-                           </div>
-                          </div>
-                          <div>
-                           <div className="text-xs font-mono text-blue-400 uppercase mb-1">Localização</div>
-                           <div className="font-bold text-lg text-white">Remoto / Brasil</div>
-                          </div>
-                          <div>
-                           <div className="text-xs font-mono text-blue-400 uppercase mb-1">Stack Principal</div>
-                           <div className="font-bold text-lg text-white">Java + Next.js</div>
-                          </div>
-                    </div>
+                <div className="bg-gradient-to-br from-slate-900/98 via-slate-900/95 to-blue-950/98 backdrop-blur-xl p-6 md:p-10 lg:p-12 border-t-2 border-blue-500/50 shadow-2xl shadow-blue-500/30 rounded-t-2xl">
+                  <div className="grid md:grid-cols-3 gap-8">
+                      <div className="md:col-span-2 space-y-4">
+                          <h2 className="text-2xl md:text-3xl font-bold text-transparent bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text uppercase tracking-wider flex items-center gap-3">
+                              <span className="text-cyan-400 text-3xl">//</span> Perfil Profissional
+                          </h2>
+                          <p className="text-sm md:text-base text-slate-200 leading-relaxed text-justify">
+                              Com um ano de experiência no setor de TI, possuo uma mentalidade analítica e comprometida, sempre focada em entregar resultados precisos e de alta qualidade. 
+                              Acredito que todo desafio é uma oportunidade de aprendizado e que o crescimento profissional está diretamente ligado à dedicação.
+                          </p>
+                          <p className="text-sm md:text-base text-slate-200 leading-relaxed text-justify">
+                              Meu objetivo é contribuir ativamente para projetos de impacto, agregando valor por meio da tecnologia e da melhoria contínua de processos.
+                          </p>
+                      </div>
+                      <div className="md:col-span-1 border-l-2 border-blue-500/50 pl-6 md:pl-8 flex flex-col justify-center space-y-5">
+                            <div className="bg-slate-800/50 p-4 rounded-lg border border-blue-500/30">
+                             <div className="text-xs font-mono text-blue-300 uppercase mb-2">Status</div>
+                             <div className="font-bold text-base text-white flex items-center gap-2">
+                               <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+                               Disponível para Freelance
+                             </div>
+                            </div>
+                            <div className="bg-slate-800/50 p-4 rounded-lg border border-blue-500/30">
+                             <div className="text-xs font-mono text-blue-300 uppercase mb-2">Localização</div>
+                             <div className="font-bold text-base text-white">Remoto / Brasil</div>
+                            </div>
+                            <div className="bg-slate-800/50 p-4 rounded-lg border border-blue-500/30">
+                             <div className="text-xs font-mono text-blue-300 uppercase mb-2">Stack Principal</div>
+                             <div className="font-bold text-base text-white">Java + Next.js</div>
+                            </div>
+                      </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -444,7 +477,6 @@ export default function Home() {
                           </ul>
                       </div>
                       
-                      {/* Code Snippet Visual */}
                       <div className="relative aspect-square bg-slate-950 rounded-lg border-2 border-blue-500/30 p-6 font-mono text-xs text-green-400 overflow-auto opacity-80 hover:opacity-100 transition-opacity">
                           <div className="space-y-1">
                             <p className="text-blue-400">@RestController</p>
@@ -551,7 +583,6 @@ export default function Home() {
 
       {/* --- CONTACT SECTION --- */}
       <section id="contato" className="min-h-screen bg-gradient-to-br from-slate-900 to-slate-950 text-white px-6 md:px-12 lg:px-20 py-20 relative overflow-hidden z-10 border-t-2 border-blue-500/30">
-        {/* Elementos de fundo decorativos */}
         <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-blue-600/20 rounded-full blur-[150px] pointer-events-none animate-pulse" />
         <div className="absolute bottom-0 left-0 w-[600px] h-[600px] bg-cyan-600/20 rounded-full blur-[150px] pointer-events-none animate-pulse delay-1000" />
 
