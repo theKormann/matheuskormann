@@ -177,7 +177,7 @@ export default function Home() {
         <div className="max-w-[1800px] mx-auto flex justify-between items-center">
             {/* Logo / Brand */}
             <div className="font-mono text-xl font-bold text-blue-500 tracking-tighter cursor-pointer" onClick={scrollToTop}>
-               &lt;MK /&gt;
+               &lt;dev kormann/&gt;
             </div>
 
             {/* Menu Desktop */}
