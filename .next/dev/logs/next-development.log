@@ -1,0 +1,17 @@
+[00:00:05.664] Server  LOG     
+[00:00:05.674] Server  LOG        We detected TypeScript in your project and reconfigured your tsconfig.json file for you.
+[00:00:05.676] Server  LOG        The following suggested values were added to your tsconfig.json. These values can be changed to fit your project's needs:
+
+[00:00:05.679] Server  LOG        	- include was updated to add '.next/dev/types/**/*.ts'
+[00:00:05.681] Server  LOG     
+[00:00:05.683] Server  LOG        The following mandatory changes were made to your tsconfig.json:
+
+[00:00:05.686] Server  LOG        	- jsx was set to react-jsx (next.js uses the React automatic runtime)
+[00:00:05.686] Server  LOG     
+[00:00:06.898] Server  LOG      ✓ Ready in 5.4s
+[00:00:27.346] Server  LOG      ○ Compiling / ...
+[00:00:47.451] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:00:49.029] Server  LOG      ○ Compiling /_not-found/page ...
+[00:00:49.704] Browser LOG     %c[Vercel Web Analytics]%c Debug mode is enabled by default in development. No requests will be sent to the server. color: rgb(120, 120, 120) color: inherit
+[00:00:49.704] Browser LOG     %c[Vercel Web Analytics]%c Running queued event color: rgb(120, 120, 120) color: inherit pageview {"path":"/","route":"/"}
+[00:00:49.704] Browser LOG     %c[Vercel Web Analytics]%c [pageview] http://localhost:3000/ color: rgb(120, 120, 120) color: inherit {"dp":"/","o":"http://localhost:3000/","r":"","sdkn":"@vercel/analytics/next","sdkv":"1.6.1","sv":"0.1.3","ts":1765071767833}
