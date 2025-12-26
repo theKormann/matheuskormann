@@ -370,18 +370,18 @@ export default function Home() {
                         <div className="bg-slate-950/50 p-5 rounded-xl border border-blue-500/10 hover:border-blue-500/40 transition-colors">
                             <div className="text-xs font-mono text-blue-400 uppercase mb-2 tracking-wider">Status Atual</div>
                             <div className="font-bold text-lg text-white flex items-center gap-3">
-                                <span className="relative flex h-3 w-3">
-                                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-                                  <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
-                                </span>
-                                Disponível para Freelance
+                              <div className="relative flex h-3 w-3">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500" />
+                              </div>
+                              Disponível
                             </div>
                         </div>
                         <div className="bg-slate-950/50 p-5 rounded-xl border border-blue-500/10 hover:border-blue-500/40 transition-colors">
                             <div className="text-xs font-mono text-blue-400 uppercase mb-2 tracking-wider">Localização</div>
                             <div className="font-bold text-lg text-white flex items-center gap-2">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-                                Remoto / Brasil
+                                São Paulo / Brasil
                             </div>
                         </div>
                         <div className="bg-slate-950/50 p-5 rounded-xl border border-blue-500/10 hover:border-blue-500/40 transition-colors">
