@@ -1,5 +1,6 @@
 'use client'
 
+import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
@@ -96,7 +97,7 @@ export default function Home() {
     }
   }
 
-  // Cálculos visuais baseados no scroll (simplificados para evitar bugs visuais)
+  // Cálculos visuais baseados no scroll
   const heroHeight = typeof window !== 'undefined' ? window.innerHeight : 800
   const scrollProgress = Math.min(scrollY / heroHeight, 1)
   const imageScale = Math.max(0.65, 1 - (scrollProgress * 0.35))
@@ -104,7 +105,9 @@ export default function Home() {
   const imageTranslateX = isMobile ? (-scrollProgress * 30) : 0
   
   const navOpacity = scrollY > 50 ? 0.95 : 1
-  const heroContentOpacity = Math.max(0, 1 - (scrollProgress * 1.5))
+  
+  // CORREÇÃO AQUI: Se for mobile, a opacidade é sempre 1. Se for desktop, aplica o efeito.
+  const heroContentOpacity = isMobile ? 1 : Math.max(0, 1 - (scrollProgress * 1.5))
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
     e.preventDefault()
@@ -255,7 +258,7 @@ export default function Home() {
         <div className="w-full max-w-[1800px] mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-0 items-center">
             
-            {/* Coluna da Imagem (Esquerda) - REMOVIDO 'order-2' PARA FICAR PRIMEIRO NO MOBILE */}
+            {/* Coluna da Imagem (Esquerda) */}
             <div className="flex items-center justify-center p-6 md:p-8 lg:p-16 relative">
               <div 
                 className="relative w-full max-w-lg aspect-[3/4] transition-all duration-300 ease-out hover:scale-105 group px-4 overflow-hidden rounded-2xl"
@@ -287,7 +290,7 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Coluna de Conteúdo (Direita) - REMOVIDO 'order-1' PARA FICAR EMBAIXO NO MOBILE */}
+            {/* Coluna de Conteúdo (Direita) */}
             <div className="flex flex-col justify-center p-6 md:p-8 lg:p-16 relative" style={{ opacity: heroContentOpacity }}>
                 <div className="font-mono text-sm text-blue-400 mb-4 tracking-widest uppercase flex items-center gap-2">
                   <span className="text-blue-500">&gt;_</span>
@@ -735,6 +738,8 @@ export default function Home() {
             <span>© {new Date().getFullYear()} Matheus Kormann</span>
             <span className="text-blue-900/50">|</span>
             <span>Next.js & Java Power</span>
+            <span className="text-blue-900/50">|</span>
+            <span className="text-purple-900/80">Manu 👩💫💜</span>
           </div>
         </div>
       </section>
