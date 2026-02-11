@@ -188,6 +188,7 @@ export default function Home() {
                 {[
                   { name: 'Home', id: 'home' },
                   { name: 'Perfil', id: 'perfil' },
+                  { name: 'Currículo', id: 'curriculo' },
                   { name: 'Projetos', id: 'projetos' },
                   { name: 'Stack', id: 'stack' },
                   { name: 'Contato', id: 'contato' }
