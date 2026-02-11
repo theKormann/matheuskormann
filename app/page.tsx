@@ -4,6 +4,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState, useRef } from 'react'
+import { ResumeSection } from '@/components/resume-section' // <--- Importação adicionada
 
 export default function Home() {
   const [scrollY, setScrollY] = useState(0)
@@ -28,7 +29,8 @@ export default function Home() {
       setShowScrollTop(window.scrollY > 500)
       
       // Detectar seção ativa com offset ajustado
-      const sections = ['home', 'perfil', 'projetos', 'stack', 'contato']
+      // ADICIONADO 'curriculo' NA LISTA
+      const sections = ['home', 'perfil', 'projetos', 'curriculo', 'stack', 'contato']
       const scrollPosition = window.scrollY + 300 // Offset para ativar a seção um pouco antes
       
       for (const section of sections) {
@@ -106,7 +108,6 @@ export default function Home() {
   
   const navOpacity = scrollY > 50 ? 0.95 : 1
   
-  // CORREÇÃO AQUI: Se for mobile, a opacidade é sempre 1. Se for desktop, aplica o efeito.
   const heroContentOpacity = isMobile ? 1 : Math.max(0, 1 - (scrollProgress * 1.5))
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, sectionId: string) => {
@@ -129,6 +130,16 @@ export default function Home() {
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }
+
+  // Lista de links de navegação atualizada
+  const navLinks = [
+    { name: 'Home', id: 'home' },
+    { name: 'Perfil', id: 'perfil' },
+    { name: 'Projetos', id: 'projetos' },
+    { name: 'Currículo', id: 'curriculo' }, // <--- NOVO LINK
+    { name: 'Stack', id: 'stack' },
+    { name: 'Contato', id: 'contato' }
+  ]
 
   return (
     <main className="min-h-screen bg-slate-950 text-slate-200 selection:bg-blue-500 selection:text-white relative overflow-x-hidden font-sans scroll-smooth">
@@ -185,14 +196,7 @@ export default function Home() {
 
             {/* Menu Desktop */}
             <nav className="hidden md:flex items-center gap-8">
-                {[
-                  { name: 'Home', id: 'home' },
-                  { name: 'Perfil', id: 'perfil' },
-                  { name: 'Currículo', id: 'curriculo' },
-                  { name: 'Projetos', id: 'projetos' },
-                  { name: 'Stack', id: 'stack' },
-                  { name: 'Contato', id: 'contato' }
-                ].map((item) => (
+                {navLinks.map((item) => (
                   <Link 
                     key={item.id}
                     href={`#${item.id}`} 
@@ -234,13 +238,7 @@ export default function Home() {
         {/* Menu Mobile (Overlay) */}
         <div className={`fixed inset-0 bg-slate-950 z-[9998] flex flex-col items-center justify-center transition-all duration-300 md:hidden ${isMobileMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'}`}>
             <nav className="flex flex-col gap-8 text-center">
-                {[
-                  { name: 'Home', id: 'home' },
-                  { name: 'Perfil', id: 'perfil' },
-                  { name: 'Projetos', id: 'projetos' },
-                  { name: 'Stack', id: 'stack' },
-                  { name: 'Contato', id: 'contato' }
-                ].map((item) => (
+                {navLinks.map((item) => (
                   <Link 
                     key={item.id}
                     href={`#${item.id}`} 
@@ -423,7 +421,7 @@ export default function Home() {
                     </div>
                     {/* Imagem do Projeto */}
                     <Image
-                      src="/images/mmi-preview.png" // Adicione a screenshot do site aqui
+                      src="/images/mmi-preview.png" 
                       alt="MMI Real Estate - Preview do site"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -461,7 +459,7 @@ export default function Home() {
                     </div>
                     {/* Imagem do Projeto */}
                     <Image
-                      src="/images/allipel-preview.png" // Adicione a screenshot do site aqui
+                      src="/images/allipel-preview.png" 
                       alt="Allipel - Preview do site"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -491,7 +489,7 @@ export default function Home() {
                     </div>
                     {/* Imagem do Projeto */}
                     <Image
-                      src="/images/dagym-preview.png" // Adicione a screenshot do site aqui
+                      src="/images/dagym-preview.png"
                       alt="Dagym - Preview do site"
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
@@ -571,6 +569,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* --- SEÇÃO CURRICULO (NOVA) --- */}
+      <ResumeSection />
 
       {/* --- SERVICES / STACK SECTION --- */}
       <section id="stack" className="min-h-screen bg-slate-950 px-6 md:px-12 lg:px-20 py-20 border-t border-blue-500/10 relative z-10">
@@ -740,7 +741,7 @@ export default function Home() {
             <span className="text-blue-900/50">|</span>
             <span>Next.js & Java Power</span>
             <span className="text-blue-900/50">|</span>
-            <span className="text-purple-900/80">Manu 👩💫💜</span>
+            <span className="text-purple-900/80">Manu 👩‍🚀💜</span>
           </div>
         </div>
       </section>
